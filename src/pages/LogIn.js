@@ -72,7 +72,7 @@ const LogIn = () => {
           </div>
         </div>
       </div>
-      <div className="bg-[#0C234C] rounded-t-md p-10 md:h-screen flex items-center justify-center flex-1">
+      <div className="bg-[#0C234C] rounded-t-md md:rounded-none p-10 md:h-screen flex items-center justify-center flex-1">
         <div className="px-10 max-w-[576px] w-full">
           <img
             className="  w-full"
