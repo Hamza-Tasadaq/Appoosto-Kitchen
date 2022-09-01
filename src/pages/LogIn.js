@@ -1,9 +1,14 @@
+import { Link } from "react-router-dom";
 import { Input } from "../components";
 import Container from "../components/Container";
 
 const LogIn = () => {
   return (
-    <Container classes={" flex flex-col-reverse md:flex-row  px-3 py-2 md:p-0 min-h-screen"}>
+    <Container
+      classes={
+        " flex flex-col-reverse md:flex-row  px-3 py-2 md:p-0 min-h-screen"
+      }
+    >
       <div className="self-center md:max-w-md w-full 	">
         <div className="py-2 md:py-0 px-3 sm:px-6 md:px-10">
           <img src="./assets/icons/logo.svg" alt="logo" />
@@ -59,9 +64,12 @@ const LogIn = () => {
               <h5 className="underline">forgot password</h5>
             </div>
 
-            <button className="rounded-md text-[#ffffff] text-base font-semibold bg-[#D85C27] w-full py-2">
+            <Link
+              to="/home"
+              className="rounded-md block text-center text-[#ffffff] text-base font-semibold bg-[#D85C27] w-full py-2"
+            >
               Log In
-            </button>
+            </Link>
           </form>
 
           <div className="mt-4 font-medium">
