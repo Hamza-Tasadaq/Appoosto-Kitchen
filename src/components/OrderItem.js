@@ -73,7 +73,7 @@ const OrderItem = ({ provided, orderDetails }) => {
         </div>
       </div>
       {isOpen && (
-        <div className="my-2.5 grid grid-cols-3 gap-4">
+        <div className="my-2.5 grid grid-cols-2 md:grid-cols-3 gap-4">
           {preparation &&
             preparation.map((orderItemData, index) => (
               <OrderItemCard

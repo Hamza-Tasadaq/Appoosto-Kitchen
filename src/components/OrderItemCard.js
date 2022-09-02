@@ -59,19 +59,19 @@ const OrderItemCard = ({ status = "", orderItemData = {}, table = "" }) => {
 
       <div>
         <div className="flex items-center ">
-          <h2 className="text-[#0A111F] w-36 font-semibold text-base">
+          <h2 className="text-[#0A111F] w-28 lg:w-36 font-semibold text-base">
             Without:
           </h2>
           <p className="text-[#627193] flex-1 text-sm font-normal">{without}</p>
         </div>
         <div className="flex items-center ">
-          <h2 className="text-[#0A111F] w-36 font-semibold text-base">
+          <h2 className="text-[#0A111F] w-28 lg:w-36 font-semibold text-base">
             Extra:
           </h2>
           <p className="text-[#627193] flex-1 text-sm font-normal">{extra}</p>
         </div>
         <div className="flex items-center ">
-          <h2 className="text-[#0A111F] w-36 font-semibold text-base">
+          <h2 className="text-[#0A111F] w-28 lg:w-36 font-semibold text-base">
             Variant 1:
           </h2>
           <p className="text-[#627193] flex-1 text-sm font-normal">
@@ -79,13 +79,15 @@ const OrderItemCard = ({ status = "", orderItemData = {}, table = "" }) => {
           </p>
         </div>
         <div className="flex items-center ">
-          <h2 className="text-[#0A111F] w-36 font-semibold text-base">
+          <h2 className="text-[#0A111F] w-28 lg:w-36 font-semibold text-base">
             Order Time:
           </h2>
           <p className="text-[#627193] flex-1 text-sm font-normal">{time}</p>
         </div>
         <div className="flex items-center ">
-          <h2 className="text-[#0A111F] w-36 font-semibold text-base">Note:</h2>
+          <h2 className="text-[#0A111F] w-28 lg:w-36 font-semibold text-base">
+            Note:
+          </h2>
           <p className="text-[#627193] flex-1 text-sm font-normal">{note}</p>
         </div>
       </div>
@@ -98,7 +100,14 @@ const OrderItemCard = ({ status = "", orderItemData = {}, table = "" }) => {
         }`}
       />
 
-      <div className="flex items-center justify-end space-x-2">
+      <div
+        className={`flex items-center  space-x-2 ${
+          status === "preparation" && "justify-between"
+        }
+        ${status === "rejected" && "justify-end"}
+        ${status === "ready" && "justify-start"}
+        `}
+      >
         {status === "preparation" && <CardButton text="Reject" />}
         {(status === "rejected" || status === "ready") && (
           <CardButton text="On preparation" />
