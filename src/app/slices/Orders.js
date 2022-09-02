@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   orders: [
@@ -52,6 +52,7 @@ const initialState = {
             count: 3,
           },
         ],
+        rejected: [],
       },
     },
     {
@@ -119,7 +120,45 @@ export const ordersSlice = createSlice({
       state.orders = newOrders;
     },
 
-    updateOrderStatus: (state, actions) => {},
+    updateOrderStatus: (state, actions) => {
+      const { type, id, table, status } = actions.payload;
+
+      //   Finding the table in which have to update the orders and their index
+      const mainIndex = state.orders.findIndex((x) => x.table === table);
+      let ordersList = state.orders.find((x) => x.table === table);
+
+      //   Finding the orders according to the status
+      const sameStatusOrders = ordersList.orders[status];
+
+      // Order Which have to move
+      const orderToUpdate = sameStatusOrders.find((x) => x.id === id);
+
+      // Selecting the index to remove
+      const innerIndex = sameStatusOrders.findIndex(
+        (x) => x.id === orderToUpdate.id
+      );
+
+      // Removing an item from already exists menu
+      ordersList.orders[status].splice(innerIndex, 1);
+
+      switch (type) {
+        case "Ready": {
+          // Pushing Order into ready state
+          ordersList.orders["ready"].push(orderToUpdate);
+          break;
+        }
+        case "Reject": {
+          // Pushing Order into Rejected state
+          ordersList.orders["rejected"].push(orderToUpdate);
+          break;
+        }
+        case "On preparation": {
+          // Pushing Order into preparation state
+          ordersList.orders["preparation"].push(orderToUpdate);
+          break;
+        }
+      }
+    },
   },
 });
 

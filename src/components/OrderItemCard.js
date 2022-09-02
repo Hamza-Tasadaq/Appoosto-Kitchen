@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { splitCard } from "../app/slices/Orders";
+import { splitCard, updateOrderStatus } from "../app/slices/Orders";
 import CardButton from "./CardButton";
 import Switch from "./Switch";
 
@@ -8,9 +8,14 @@ const OrderItemCard = ({ status = "", orderItemData = {}, table = "" }) => {
   const { id, title, time, without, extra, variant1, note, count } =
     orderItemData;
 
+  // Button to handle Split Click
   const handleSplit = () => {
     dispatch(splitCard({ id, table, status }));
-    console.log("split Happens");
+  };
+
+  // Button to handle change status buttons for single item
+  const handleButtonClick = (text) => {
+    dispatch(updateOrderStatus({ type: text, id, table, status }));
   };
   return (
     <div
@@ -108,12 +113,16 @@ const OrderItemCard = ({ status = "", orderItemData = {}, table = "" }) => {
         ${status === "ready" && "justify-start"}
         `}
       >
-        {status === "preparation" && <CardButton text="Reject" />}
+        {status === "preparation" && (
+          <CardButton clickHandle={handleButtonClick} text="Reject" />
+        )}
         {(status === "rejected" || status === "ready") && (
-          <CardButton text="On preparation" />
+          <CardButton clickHandle={handleButtonClick} text="On preparation" />
         )}
 
-        {status === "preparation" && <CardButton text="Ready" />}
+        {status === "preparation" && (
+          <CardButton clickHandle={handleButtonClick} text="Ready" />
+        )}
       </div>
     </div>
   );

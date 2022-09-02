@@ -1,6 +1,9 @@
-const CardButton = ({ text = "" }) => {
+const CardButton = ({ text = "", clickHandle = () => {} }) => {
   return (
     <button
+      onClick={() => {
+        clickHandle(text);
+      }}
       className={`${text === "Reject" && "bg-[#FF5757] "} ${
         text === "On preparation" && "bg-[#32C5FF]"
       } ${
