@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import OrderItem from "./OrderItem";
 
 const OrdersList = ({ filters }) => {
-
   const [orders, updateOrders] = useState(
     useSelector((state) => state.orders.orders)
   );
@@ -14,7 +13,7 @@ const OrdersList = ({ filters }) => {
   // ReUpdate the Orders Array When Change in redux store
   useEffect(() => {
     updateOrders(updatedOrders);
-  }, [updatedOrders, useSelector((state) => state.orders.orders)]);
+  });
 
   //   Runs on drag and drop of an Item
   const handleOnDragEnd = (result) => {

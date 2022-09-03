@@ -14,6 +14,7 @@ const Home = () => {
       if (orderItem.orders.preparation.length > 0) {
         return orderItem;
       }
+      return null;
     });
 
     // If preparation state have one or more items then it will update the state if If block and else in else block
@@ -22,7 +23,7 @@ const Home = () => {
     } else {
       setIsPreparationHave(false);
     }
-  }, [useSelector((state) => state.orders)]);
+  });
 
   // Hold The filters
   const [filters, setFilters] = useState({
