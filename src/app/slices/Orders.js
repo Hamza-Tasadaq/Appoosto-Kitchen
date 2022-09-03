@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   orders: [
@@ -119,12 +119,11 @@ export const ordersSlice = createSlice({
       //   Updating the state orders
       state.orders = newOrders;
     },
-
     updateOrderStatus: (state, actions) => {
       const { type, id, table, status } = actions.payload;
 
       //   Finding the table in which have to update the orders and their index
-      const mainIndex = state.orders.findIndex((x) => x.table === table);
+      state.orders.findIndex((x) => x.table === table);
       let ordersList = state.orders.find((x) => x.table === table);
 
       //   Finding the orders according to the status
@@ -155,6 +154,9 @@ export const ordersSlice = createSlice({
         case "On preparation": {
           // Pushing Order into preparation state
           ordersList.orders["preparation"].push(orderToUpdate);
+          break;
+        }
+        default: {
           break;
         }
       }

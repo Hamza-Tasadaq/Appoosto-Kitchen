@@ -52,7 +52,9 @@ const OrderItemCard = ({ status = "", orderItemData = {}, table = "" }) => {
             <span>{time}</span>
           </p>
         </div>
-        {count > 1 && <Switch handleSplit={handleSplit} text="Split" />}
+        {count > 1 && status === "preparation" && (
+          <Switch handleSplit={handleSplit} text="Split" />
+        )}
       </div>
       <div
         className={`w-full h-px  ${
