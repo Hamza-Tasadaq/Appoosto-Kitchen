@@ -2,7 +2,9 @@ import { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import OrderItemCard from "./OrderItemCard";
 
-const OrderItem = ({ provided, orderDetails }) => {
+const OrderItem = ({ provided, orderDetails, filters }) => {
+  const { isReadyClicked, isRefusedClicked } = filters;
+
   // Destructing the Props of details of orders
   const { table, floor, time, orders } = orderDetails;
 
@@ -84,6 +86,7 @@ const OrderItem = ({ provided, orderDetails }) => {
                 />
               ))}
             {ready &&
+              isReadyClicked &&
               ready.map((orderItemData, index) => (
                 <OrderItemCard
                   key={index}
@@ -93,6 +96,7 @@ const OrderItem = ({ provided, orderDetails }) => {
                 />
               ))}
             {rejected &&
+              isRefusedClicked &&
               rejected.map((orderItemData, index) => (
                 <OrderItemCard
                   key={index}
