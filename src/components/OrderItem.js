@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { updateAllOrdersOfTable } from "../app/slices/Orders";
 import OrderItemCard from "./OrderItemCard";
 
 const OrderItem = ({ provided, orderDetails, filters }) => {
   const { isReadyClicked, isRefusedClicked } = filters;
+
+  const dispatch = useDispatch();
 
   // Destructing the Props of details of orders
   const { table, floor, time, orders } = orderDetails;
@@ -15,6 +19,11 @@ const OrderItem = ({ provided, orderDetails, filters }) => {
 
   const showDetailsHandler = () => {
     setIsOpen(!isOpen);
+  };
+
+  // Buttons Runs on Update All And Reject All
+  const handleButtonClick = (text) => {
+    dispatch(updateAllOrdersOfTable({ type: text, table }));
   };
   return (
     <>
@@ -49,10 +58,20 @@ const OrderItem = ({ provided, orderDetails, filters }) => {
               </h2>
             </div>
             <div className="flex-1 flex items-center justify-end space-x-2">
-              <button className="rounded-md bg-[#71D499] lg:w-28 h-9 outline-none font-semibold text-sm lg:text-base py-1.5 px-4">
+              <button
+                onClick={() => {
+                  handleButtonClick("Prepare All");
+                }}
+                className="rounded-md bg-[#71D499] lg:w-28 h-9 outline-none font-semibold text-sm lg:text-base py-1.5 px-4"
+              >
                 Prepare All
               </button>{" "}
-              <button className="rounded-md bg-[#FF5757] lg:w-28 h-9 outline-none font-semibold text-sm lg:text-base py-1.5 px-4">
+              <button
+                onClick={() => {
+                  handleButtonClick("Reject All");
+                }}
+                className="rounded-md bg-[#FF5757] lg:w-28 h-9 outline-none font-semibold text-sm lg:text-base py-1.5 px-4"
+              >
                 Reject All
               </button>
               <button className="h-9 w-9 flex items-center justify-center rounded-md bg-[#627193]">

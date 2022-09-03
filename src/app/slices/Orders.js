@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   orders: [
@@ -161,9 +161,41 @@ export const ordersSlice = createSlice({
         }
       }
     },
+    updateAllOrdersOfTable: (state, actions) => {
+      const { type, table } = actions.payload;
+
+      //   Finding the table in which have to update the orders and their index
+      let index = state.orders.findIndex((x) => x.table === table);
+      let ordersList = state.orders.find((x) => x.table === table);
+
+      const preaprationItems = ordersList.orders.preparation;
+
+      state.orders[index].orders.preparation = [];
+
+      switch (type) {
+        case "Reject All": {
+          state.orders[index].orders.rejected = [
+            ...state.orders[index].orders.rejected,
+            ...preaprationItems,
+          ];
+          break;
+        }
+        case "Prepare All": {
+          state.orders[index].orders.ready = [
+            ...state.orders[index].orders.ready,
+            ...preaprationItems,
+          ];
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    },
   },
 });
 
-export const { splitCard, updateOrderStatus } = ordersSlice.actions;
+export const { splitCard, updateOrderStatus, updateAllOrdersOfTable } =
+  ordersSlice.actions;
 
 export default ordersSlice.reducer;
