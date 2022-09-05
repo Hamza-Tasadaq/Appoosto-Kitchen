@@ -1,9 +1,36 @@
 import { useState } from "react";
+import pdfMake from "pdfmake";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { updateAllOrdersOfTable } from "../app/slices/Orders";
 import OrderItemCard from "./OrderItemCard";
 
+// To Load Image into PDFMAke
+function getBase64ImageFromURL(url) {
+  return new Promise((resolve, reject) => {
+    var img = new Image();
+    img.setAttribute("crossOrigin", "anonymous");
+
+    img.onload = () => {
+      var canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+
+      var dataURL = canvas.toDataURL("image/png");
+
+      resolve(dataURL);
+    };
+
+    img.onerror = (error) => {
+      reject(error);
+    };
+
+    img.src = url;
+  });
+}
 const OrderItem = ({
   provided,
   orderDetails = {},
@@ -48,8 +75,121 @@ const OrderItem = ({
     }
   };
 
+  // Generate PDF function
+  const generatePdf = async () => {
+    // Content
+    let content = [
+      {
+        image: await getBase64ImageFromURL("./assets/images/logo.png"),
+        width: 68,
+        alignment: "center",
+      },
+      {
+        text: `Table ${table} Floor ${floor} ${time}`,
+        style: "mainHeading",
+        alignment: "center",
+      },
+    ];
+
+    // Pushing Dynamic Content
+    Object.entries(orders).forEach(([key, value]) => {
+      value.forEach(({ title, without, extra, variant1, note, count }) => {
+        content.push({
+          columns: [
+            {
+              text: `${title} * ${count}`,
+              alignment: "left",
+            },
+            {
+              text: `${key}`,
+              alignment: "right",
+            },
+          ],
+          style: "heading",
+        });
+        content.push({
+          alignment: "left",
+          columns: [
+            {
+              text: "Without:",
+              fontSize: 14,
+              semibold: true,
+            },
+            {
+              text: `${without}`,
+              color: "#627193",
+            },
+          ],
+        });
+        content.push({
+          alignment: "left",
+          columns: [
+            {
+              text: "Extra:",
+              fontSize: 14,
+              semibold: true,
+            },
+            {
+              text: `${extra}`,
+              color: "#627193",
+            },
+          ],
+        });
+        content.push({
+          alignment: "left",
+          columns: [
+            {
+              text: "Variant 1:",
+              fontSize: 14,
+              semibold: true,
+            },
+            {
+              text: `${variant1}`,
+              color: "#627193",
+            },
+          ],
+        });
+        content.push({
+          alignment: "left",
+          text: `${note}`,
+          color: "#627193",
+        });
+        content.push({
+          margin: [0, 5, 0, 10],
+          svg: '<svg width="260" height="2" viewBox="0 0 260 2" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0.00188678" y1="0.500004" x2="259.002" y2="1.47736" stroke="black"/></svg>',
+        });
+      });
+    });
+
+    // Document Settings
+    var docDefinition = {
+      pageSize: {
+        width: 300,
+        height: "auto",
+      },
+      pageMargins: [20, 30, 20, 30],
+      content: content,
+      styles: {
+        mainHeading: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 10, 0, 25],
+        },
+        heading: {
+          fontSize: 16,
+          semibold: true,
+          margin: [0, 10, 0, 5],
+        },
+      },
+    };
+    pdfMake.createPdf(docDefinition).download(`Table-${table}.pdf`);
+  };
   return (
-    <li {...provided.draggableProps} ref={provided.innerRef}>
+    <li
+      className="relative"
+      {...provided.draggableProps}
+      ref={provided.innerRef}
+    >
       <>
         {isProgressClicked && preparation.length > 0 && (
           <>
@@ -99,7 +239,10 @@ const OrderItem = ({
                   >
                     Reject All
                   </button>
-                  <button className="h-9 w-9 flex items-center justify-center rounded-md bg-[#627193]">
+                  <button
+                    onClick={generatePdf}
+                    className="h-9 w-9 flex items-center justify-center rounded-md bg-[#627193]"
+                  >
                     <img src="./assets/icons/download.svg" alt="svg" />
                   </button>
                   <button
@@ -119,46 +262,49 @@ const OrderItem = ({
               </div>
             </div>
             {isOpen && (
-              <div className="my-2.5 grid grid-cols-2 md:grid-cols-3 gap-4">
-                {preparation &&
-                  preparation.map(
-                    (orderItemData, index) =>
-                      validate(orderItemData.category) && (
-                        <OrderItemCard
-                          key={index}
-                          orderItemData={orderItemData}
-                          status="preparation"
-                          table={table}
-                        />
-                      )
-                  )}
-                {ready &&
-                  isReadyClicked &&
-                  ready.map(
-                    (orderItemData, index) =>
-                      validate(orderItemData.category) && (
-                        <OrderItemCard
-                          key={index}
-                          orderItemData={orderItemData}
-                          status="ready"
-                          table={table}
-                        />
-                      )
-                  )}
-                {rejected &&
-                  isRefusedClicked &&
-                  rejected.map(
-                    (orderItemData, index) =>
-                      validate(orderItemData.category) && (
-                        <OrderItemCard
-                          key={index}
-                          orderItemData={orderItemData}
-                          status="rejected"
-                          table={table}
-                        />
-                      )
-                  )}
-              </div>
+              <>
+                <div className="my-2.5 grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {preparation &&
+                    preparation.map(
+                      (orderItemData, index) =>
+                        validate(orderItemData.category) && (
+                          <OrderItemCard
+                            key={index}
+                            orderItemData={orderItemData}
+                            status="preparation"
+                            table={table}
+                          />
+                        )
+                    )}
+                  {ready &&
+                    isReadyClicked &&
+                    ready.map(
+                      (orderItemData, index) =>
+                        validate(orderItemData.category) && (
+                          <OrderItemCard
+                            key={index}
+                            orderItemData={orderItemData}
+                            status="ready"
+                            table={table}
+                          />
+                        )
+                    )}
+                  {rejected &&
+                    isRefusedClicked &&
+                    rejected.map(
+                      (orderItemData, index) =>
+                        validate(orderItemData.category) && (
+                          <OrderItemCard
+                            key={index}
+                            orderItemData={orderItemData}
+                            status="rejected"
+                            table={table}
+                          />
+                        )
+                    )}
+                </div>
+                {/* <ExportPDF orderDetails={orderDetails} /> */}
+              </>
             )}
           </>
         )}

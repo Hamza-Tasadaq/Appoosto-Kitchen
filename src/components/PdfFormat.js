@@ -1,7 +1,7 @@
 const ExportPDF = ({ orderDetails }) => {
   const { table, floor, time, orders } = orderDetails;
   return (
-    <div id="pdfFormat">
+    <div className="absolute -top-[10000000]  -left-[1000000000px]"  id="pdfFormat">
       <div className="w-[300px] text-[#0A111F]">
         <div className="flex justify-center">
           <img
@@ -17,8 +17,11 @@ const ExportPDF = ({ orderDetails }) => {
             <div key={key}>
               <div>
                 {value.map(
-                  ({ title, time, without, extra, variant1, note, count }) => (
-                    <div className="border-b py-8 border-[#0A111F]">
+                  (
+                    { title, time, without, extra, variant1, note, count },
+                    index
+                  ) => (
+                    <div key={index} className="border-b py-8 border-[#0A111F]">
                       <div className="flex w-full items-center  justify-between font-semibold text-base">
                         <h2>
                           {title} *{count}
