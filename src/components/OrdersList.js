@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 import OrderItem from "./OrderItem";
 
-const OrdersList = ({ filters }) => {
+const OrdersList = ({ filters = {}, selectedCategories = {} }) => {
   const [orders, updateOrders] = useState(
     useSelector((state) => state.orders.orders)
   );
@@ -13,7 +12,7 @@ const OrdersList = ({ filters }) => {
   // ReUpdate the Orders Array When Change in redux store
   useEffect(() => {
     updateOrders(updatedOrders);
-  });
+  }, [updatedOrders]);
 
   //   Runs on drag and drop of an Item
   const handleOnDragEnd = (result) => {
@@ -40,6 +39,7 @@ const OrdersList = ({ filters }) => {
               >
                 {(provided) => (
                   <OrderItem
+                    selectedCategories={selectedCategories}
                     filters={filters}
                     updateOrders={updateOrders}
                     provided={provided}

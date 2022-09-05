@@ -1,29 +1,29 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 import { Categories, Header, OrdersList, Switch } from "../components";
 
 const Home = () => {
-  const { orders } = useSelector((state) => state.orders);
-
   // Holds Is there is any item in preparation state
-  const [isPreparationHave, setIsPreparationHave] = useState();
+  // const [isPreparationHave, setIsPreparationHave] = useState();
 
-  // useEffect(() => {
-  //   // Check Is there in item exists which have preparation state
-  //   const response = orders.filter((orderItem) => {
-  //     if (orderItem.orders.preparation.length > 0) {
-  //       return orderItem;
-  //     }
-  //     return null;
-  //   });
+  const [selectedCategories, setSelectedCategories] = useState({
+    pizza: false,
+    drinks: false,
+    hotdog: false,
+    fries: false,
+    muffins: false,
+    breads: false,
+    icecream: false,
+    cupcake: false,
+  });
 
-  //   // If preparation state have one or more items then it will update the state if If block and else in else block
-  //   if (response.length > 0) {
-  //     setIsPreparationHave(true);
-  //   } else {
-  //     setIsPreparationHave(false);
-  //   }
-  // });
+  const categoryClickHandler = (selectedItem, itemClicked) => {
+    setSelectedCategories({
+      ...selectedCategories,
+      [selectedItem]: !selectedCategories[selectedItem],
+    });
+  };
+
+  console.log({ selectedCategories });
 
   // Hold The filters
   const [filters, setFilters] = useState({
@@ -95,8 +95,11 @@ const Home = () => {
             <Switch handleFilter={filtersHandler} text={"Show Ready"} />
           </div>
         </div>
-        <Categories />
-        <OrdersList filters={filters} />
+        <Categories
+          selectedCategories={selectedCategories}
+          categoryClickHandler={categoryClickHandler}
+        />
+        <OrdersList selectedCategories={selectedCategories} filters={filters} />
       </div>
     </div>
   );

@@ -10,8 +10,9 @@ const initialState = {
       orders: {
         preparation: [
           {
-            id: "chiilli Fry",
-            title: "Chiclii Fry",
+            category: "muffins",
+            id: "muffins Fry",
+            title: "muffins",
             time: "4:30",
             without: "Tomato",
             extra: "Extra Mozilla",
@@ -20,8 +21,9 @@ const initialState = {
             count: 1,
           },
           {
-            id: "chicken Fry",
-            title: "Chicked Fry",
+            category: "fries",
+            id: "fries Fry",
+            title: "fries Fry",
             time: "4:30",
             without: "Tomato",
             extra: "Extra Mozilla",
@@ -32,8 +34,9 @@ const initialState = {
         ],
         ready: [
           {
-            id: "sdsd Fry",
-            title: "Chiclii Fry",
+            category: "pizza",
+            id: "pizza ",
+            title: "pizza ",
             time: "4:20",
             without: "Tomato",
             extra: "Extra Mozilla",
@@ -42,8 +45,9 @@ const initialState = {
             count: 1,
           },
           {
-            id: "pizzaS",
-            title: "Chicked Fry",
+            category: "pizza",
+            id: "pizza",
+            title: "pizza Fry",
             time: "4:30",
             without: "Tomato",
             extra: "Extra Mozilla",
@@ -54,8 +58,9 @@ const initialState = {
         ],
         rejected: [
           {
-            id: "sdsd Fry",
-            title: "pizza peprony",
+            category: "drinks",
+            id: "drinks",
+            title: "drinks",
             time: "4:20",
             without: "Tomato",
             extra: "Extra Mozilla",
@@ -72,13 +77,12 @@ const initialState = {
       floor: "1",
       time: "2:45",
       orders: {
-        preparation: [
-          
-        ],
+        preparation: [],
         ready: [
           {
-            id: "sdsd Fry",
-            title: "Chiclii Fry",
+            category: "cupcake",
+            id: "cupcake ",
+            title: "cupcake",
             time: "4:20",
             without: "Tomato",
             extra: "Extra Mozilla",
@@ -87,8 +91,9 @@ const initialState = {
             count: 1,
           },
           {
-            id: "pizzaS",
-            title: "Chicked Fry",
+            category: "breads",
+            id: "breads",
+            title: "breads",
             time: "4:30",
             without: "Tomato",
             extra: "Extra Mozilla",
@@ -99,8 +104,9 @@ const initialState = {
         ],
         rejected: [
           {
-            id: "sdsd Fry",
-            title: "pizza peprony",
+            category: "hotdog",
+            id: "hotdog",
+            title: "hotdog",
             time: "4:20",
             without: "Tomato",
             extra: "Extra Mozilla",
@@ -119,8 +125,9 @@ const initialState = {
       orders: {
         preparation: [
           {
-            id: "chiilli Fry",
-            title: "Chiclii Fry",
+            category: "breads",
+            id: "breads Fry",
+            title: "breads",
             time: "4:30",
             without: "Tomato",
             extra: "Extra Mozilla",
@@ -129,8 +136,9 @@ const initialState = {
             count: 1,
           },
           {
-            id: "chicken Fry",
-            title: "Chicked Fry",
+            category: "icecream",
+            id: "icecream",
+            title: "icecream",
             time: "4:30",
             without: "Tomato",
             extra: "Extra Mozilla",
@@ -141,8 +149,9 @@ const initialState = {
         ],
         ready: [
           {
-            id: "sdsd Fry",
-            title: "Chiclii Fry",
+            category: "muffins",
+            id: "muffins",
+            title: "muffins",
             time: "4:20",
             without: "Tomato",
             extra: "Extra Mozilla",
@@ -151,8 +160,9 @@ const initialState = {
             count: 1,
           },
           {
+            category: "pizza",
             id: "pizzaS",
-            title: "Chicked Fry",
+            title: "pizza Fry",
             time: "4:30",
             without: "Tomato",
             extra: "Extra Mozilla",
@@ -163,8 +173,9 @@ const initialState = {
         ],
         rejected: [
           {
-            id: "sdsd Fry",
-            title: "pizza peprony",
+            category: "hotdog",
+            id: "hotdog",
+            title: "hotdog",
             time: "4:20",
             without: "Tomato",
             extra: "Extra Mozilla",

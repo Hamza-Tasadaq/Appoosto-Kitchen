@@ -4,7 +4,12 @@ import { useDispatch } from "react-redux";
 import { updateAllOrdersOfTable } from "../app/slices/Orders";
 import OrderItemCard from "./OrderItemCard";
 
-const OrderItem = ({ provided, orderDetails, filters }) => {
+const OrderItem = ({
+  provided,
+  orderDetails = {},
+  filters = {},
+  selectedCategories = {},
+}) => {
   const {
     isReadyClicked,
     isRefusedClicked,
@@ -30,7 +35,19 @@ const OrderItem = ({ provided, orderDetails, filters }) => {
   const handleButtonClick = (text) => {
     dispatch(updateAllOrdersOfTable({ type: text, table }));
   };
-  
+
+  // Check Is it exist in selected Categories or not?
+  const validate = (category) => {
+    const notSelectedAnyCategory = Object.values(selectedCategories).every(
+      (value) => value === false
+    );
+    if (notSelectedAnyCategory) {
+      return true;
+    } else {
+      return selectedCategories[category];
+    }
+  };
+
   return (
     <li {...provided.draggableProps} ref={provided.innerRef}>
       <>
@@ -104,34 +121,43 @@ const OrderItem = ({ provided, orderDetails, filters }) => {
             {isOpen && (
               <div className="my-2.5 grid grid-cols-2 md:grid-cols-3 gap-4">
                 {preparation &&
-                  preparation.map((orderItemData, index) => (
-                    <OrderItemCard
-                      key={index}
-                      orderItemData={orderItemData}
-                      status="preparation"
-                      table={table}
-                    />
-                  ))}
+                  preparation.map(
+                    (orderItemData, index) =>
+                      validate(orderItemData.category) && (
+                        <OrderItemCard
+                          key={index}
+                          orderItemData={orderItemData}
+                          status="preparation"
+                          table={table}
+                        />
+                      )
+                  )}
                 {ready &&
                   isReadyClicked &&
-                  ready.map((orderItemData, index) => (
-                    <OrderItemCard
-                      key={index}
-                      orderItemData={orderItemData}
-                      status="ready"
-                      table={table}
-                    />
-                  ))}
+                  ready.map(
+                    (orderItemData, index) =>
+                      validate(orderItemData.category) && (
+                        <OrderItemCard
+                          key={index}
+                          orderItemData={orderItemData}
+                          status="ready"
+                          table={table}
+                        />
+                      )
+                  )}
                 {rejected &&
                   isRefusedClicked &&
-                  rejected.map((orderItemData, index) => (
-                    <OrderItemCard
-                      key={index}
-                      orderItemData={orderItemData}
-                      status="rejected"
-                      table={table}
-                    />
-                  ))}
+                  rejected.map(
+                    (orderItemData, index) =>
+                      validate(orderItemData.category) && (
+                        <OrderItemCard
+                          key={index}
+                          orderItemData={orderItemData}
+                          status="rejected"
+                          table={table}
+                        />
+                      )
+                  )}
               </div>
             )}
           </>
