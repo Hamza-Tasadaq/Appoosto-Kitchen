@@ -6,29 +6,31 @@ const Home = () => {
   const { orders } = useSelector((state) => state.orders);
 
   // Holds Is there is any item in preparation state
-  const [isPreparationHave, setIsPreparationHave] = useState(false);
+  const [isPreparationHave, setIsPreparationHave] = useState();
 
-  useEffect(() => {
-    // Check Is there in item exists which have preparation state
-    const response = orders.filter((orderItem) => {
-      if (orderItem.orders.preparation.length > 0) {
-        return orderItem;
-      }
-      return null;
-    });
+  // useEffect(() => {
+  //   // Check Is there in item exists which have preparation state
+  //   const response = orders.filter((orderItem) => {
+  //     if (orderItem.orders.preparation.length > 0) {
+  //       return orderItem;
+  //     }
+  //     return null;
+  //   });
 
-    // If preparation state have one or more items then it will update the state if If block and else in else block
-    if (response.length > 0) {
-      setIsPreparationHave(true);
-    } else {
-      setIsPreparationHave(false);
-    }
-  });
+  //   // If preparation state have one or more items then it will update the state if If block and else in else block
+  //   if (response.length > 0) {
+  //     setIsPreparationHave(true);
+  //   } else {
+  //     setIsPreparationHave(false);
+  //   }
+  // });
 
   // Hold The filters
   const [filters, setFilters] = useState({
     isReadyClicked: false,
     isRefusedClicked: false,
+    isCompletedCLick: false,
+    isProgressClicked: true,
   });
 
   // Runs on modifiying Filters
@@ -43,6 +45,18 @@ const Home = () => {
         ...filters,
         isReadyClicked: !filters.isReadyClicked,
       });
+    } else if (selectedSwitch === "In Progress") {
+      setFilters({
+        ...filters,
+        isCompletedCLick: !filters.isCompletedCLick,
+        isProgressClicked: !filters.isProgressClicked,
+      });
+    } else if (selectedSwitch === "completed") {
+      setFilters({
+        ...filters,
+        isProgressClicked: !filters.isProgressClicked,
+        isCompletedCLick: !filters.isCompletedCLick,
+      });
     }
   };
   return (
@@ -52,8 +66,11 @@ const Home = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <button
+              onClick={() => {
+                filtersHandler("In Progress");
+              }}
               className={`${
-                isPreparationHave
+                filters.isProgressClicked
                   ? " bg-[#0C234C] text-[#ffffff] "
                   : " bg-transparent text-[#627193]"
               }   rounded-md font-semibold text-base py-2  px-5`}
@@ -61,8 +78,11 @@ const Home = () => {
               In Progress
             </button>
             <button
+              onClick={() => {
+                filtersHandler("completed");
+              }}
               className={`${
-                !isPreparationHave
+                filters.isCompletedCLick
                   ? " bg-[#0C234C] text-[#ffffff] "
                   : " bg-transparent text-[#627193]"
               }  rounded-md font-semibold text-base py-2  px-5`}

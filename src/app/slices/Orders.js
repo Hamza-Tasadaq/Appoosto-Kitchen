@@ -73,26 +73,7 @@ const initialState = {
       time: "2:45",
       orders: {
         preparation: [
-          {
-            id: "chiilli Fry",
-            title: "Chiclii Fry",
-            time: "4:30",
-            without: "Tomato",
-            extra: "Extra Mozilla",
-            variant1: "Rost Chicken",
-            note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            count: 1,
-          },
-          {
-            id: "chicken Fry",
-            title: "Chicked Fry",
-            time: "4:30",
-            without: "Tomato",
-            extra: "Extra Mozilla",
-            variant1: "Rost Chicken",
-            note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            count: 3,
-          },
+          
         ],
         ready: [
           {
