@@ -15,44 +15,46 @@ const Header = ({
           <img src="./assets/icons/logo.svg" alt="logo" />
         </div>
 
-        <div className="flex items-center space-x-3">
-          <button
-            onClick={() => {
-              statusUpdateHandler("Dine In");
-            }}
-            className={`duration-300 ${
-              tableStatus["Dine In"]
-                ? " bg-transparent text-[#D85C27] "
-                : " bg-[#D85C27] text-[#ffffff]"
-            } rounded-lg  py-2 px-6 border border-[#FF6422]`}
-          >
-            Dine In
-          </button>
-          <button
-            onClick={() => {
-              statusUpdateHandler("Delivery");
-            }}
-            className={`duration-300 ${
-              tableStatus.Delivery
-                ? " bg-transparent text-[#D85C27] "
-                : " bg-[#D85C27] text-[#ffffff]"
-            } rounded-lg  py-2 px-6 border border-[#FF6422]`}
-          >
-            Delivery
-          </button>
-          <button
-            onClick={() => {
-              statusUpdateHandler("Take away");
-            }}
-            className={`duration-300 ${
-              tableStatus["Take away"]
-                ? " bg-transparent text-[#D85C27] "
-                : " bg-[#D85C27] text-[#ffffff]"
-            } rounded-lg  py-2 px-6 border border-[#FF6422]`}
-          >
-            Take away
-          </button>
-        </div>
+        {isExpand && (
+          <div className="flex items-center space-x-3">
+            <button
+              onClick={() => {
+                statusUpdateHandler("Dine In");
+              }}
+              className={`duration-300 ${
+                tableStatus["Dine In"]
+                  ? " bg-transparent text-[#D85C27] "
+                  : " bg-[#D85C27] text-[#ffffff]"
+              } rounded-lg  py-2 px-6 border border-[#FF6422]`}
+            >
+              Dine In
+            </button>
+            <button
+              onClick={() => {
+                statusUpdateHandler("Delivery");
+              }}
+              className={`duration-300 ${
+                tableStatus.Delivery
+                  ? " bg-transparent text-[#D85C27] "
+                  : " bg-[#D85C27] text-[#ffffff]"
+              } rounded-lg  py-2 px-6 border border-[#FF6422]`}
+            >
+              Delivery
+            </button>
+            <button
+              onClick={() => {
+                statusUpdateHandler("Take away");
+              }}
+              className={`duration-300 ${
+                tableStatus["Take away"]
+                  ? " bg-transparent text-[#D85C27] "
+                  : " bg-[#D85C27] text-[#ffffff]"
+              } rounded-lg  py-2 px-6 border border-[#FF6422]`}
+            >
+              Take away
+            </button>
+          </div>
+        )}
         <div className="flex items-center space-x-4">
           <div
             onClick={() => {
