@@ -2,8 +2,25 @@ import { useState } from "react";
 import { Categories, Header, OrdersList, Switch } from "../components";
 
 const Home = () => {
-  // Holds Is there is any item in preparation state
-  // const [isPreparationHave, setIsPreparationHave] = useState();
+  // Holds The header is expands or not
+  const [isExpand, setIsExpand] = useState(true);
+
+  const [tableStatus, setTableStatus] = useState({
+    "Dine In": false,
+    Delivery: false,
+    "Take away": false,
+  });
+
+  // Update the status on Click
+  const statusUpdateHandler = (status) => {
+    console.log(status);
+    setTableStatus({
+      "Dine In": false,
+      Delivery: false,
+      "Take away": false,
+      [status]: !tableStatus[status],
+    });
+  };
 
   const [selectedCategories, setSelectedCategories] = useState({
     pizza: false,
@@ -61,45 +78,58 @@ const Home = () => {
   };
   return (
     <div>
-      <Header />
+      <Header
+        statusUpdateHandler={statusUpdateHandler}
+        tableStatus={tableStatus}
+        isExpand={isExpand}
+        setIsExpand={setIsExpand}
+      />
       <div className="px-3 md:px-5 lg:px-10 py-5 space-y-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={() => {
-                filtersHandler("In Progress");
-              }}
-              className={`${
-                filters.isProgressClicked
-                  ? " bg-[#0C234C] text-[#ffffff] "
-                  : " bg-transparent text-[#627193]"
-              }   rounded-md font-semibold text-base py-2  px-5`}
-            >
-              In Progress
-            </button>
-            <button
-              onClick={() => {
-                filtersHandler("completed");
-              }}
-              className={`${
-                filters.isCompletedCLick
-                  ? " bg-[#0C234C] text-[#ffffff] "
-                  : " bg-transparent text-[#627193]"
-              }  rounded-md font-semibold text-base py-2  px-5`}
-            >
-              Completed
-            </button>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Switch handleFilter={filtersHandler} text={"Show Refused"} />
-            <Switch handleFilter={filtersHandler} text={"Show Ready"} />
-          </div>
-        </div>
-        <Categories
+        {isExpand && (
+          <>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => {
+                    filtersHandler("In Progress");
+                  }}
+                  className={`${
+                    filters.isProgressClicked
+                      ? " bg-[#0C234C] text-[#ffffff] "
+                      : " bg-transparent text-[#627193]"
+                  }   rounded-md font-semibold text-base py-2  px-5`}
+                >
+                  In Progress
+                </button>
+                <button
+                  onClick={() => {
+                    filtersHandler("completed");
+                  }}
+                  className={`${
+                    filters.isCompletedCLick
+                      ? " bg-[#0C234C] text-[#ffffff] "
+                      : " bg-transparent text-[#627193]"
+                  }  rounded-md font-semibold text-base py-2  px-5`}
+                >
+                  Completed
+                </button>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Switch handleFilter={filtersHandler} text={"Show Refused"} />
+                <Switch handleFilter={filtersHandler} text={"Show Ready"} />
+              </div>
+            </div>
+            <Categories
+              selectedCategories={selectedCategories}
+              categoryClickHandler={categoryClickHandler}
+            />
+          </>
+        )}
+        <OrdersList
+          tableStatus={tableStatus}
           selectedCategories={selectedCategories}
-          categoryClickHandler={categoryClickHandler}
+          filters={filters}
         />
-        <OrdersList selectedCategories={selectedCategories} filters={filters} />
       </div>
     </div>
   );

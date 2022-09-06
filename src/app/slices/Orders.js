@@ -7,6 +7,7 @@ const initialState = {
       table: "1",
       floor: "1",
       time: "12:00",
+      status: "Take away",
       orders: {
         preparation: [
           {
@@ -76,6 +77,7 @@ const initialState = {
       table: "2",
       floor: "1",
       time: "2:45",
+      status: "Dine In",
       orders: {
         preparation: [],
         ready: [
@@ -122,6 +124,7 @@ const initialState = {
       table: "3",
       floor: "2",
       time: "12:10",
+      status: "Delivery",
       orders: {
         preparation: [
           {

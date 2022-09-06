@@ -3,7 +3,11 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 import OrderItem from "./OrderItem";
 
-const OrdersList = ({ filters = {}, selectedCategories = {} }) => {
+const OrdersList = ({
+  filters = {},
+  selectedCategories = {},
+  tableStatus = {},
+}) => {
   const [orders, updateOrders] = useState(
     useSelector((state) => state.orders.orders)
   );
@@ -39,6 +43,7 @@ const OrdersList = ({ filters = {}, selectedCategories = {} }) => {
               >
                 {(provided) => (
                   <OrderItem
+                    tableStatus={tableStatus}
                     selectedCategories={selectedCategories}
                     filters={filters}
                     updateOrders={updateOrders}
