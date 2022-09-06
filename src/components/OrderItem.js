@@ -191,10 +191,8 @@ const OrderItem = ({
       (value) => value === false
     );
     if (notSelectedAnyCategory) {
-      console.log("If");
       return true;
     } else {
-      console.log("else", tableStatus, status);
       return tableStatus[status];
     }
   };
@@ -394,39 +392,54 @@ const OrderItem = ({
                   <img src="./assets/icons/dots.svg" alt="dots" />
                 </div>
               </div>
-              {isOpen && (
-                <div className="my-2.5 grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {preparation &&
-                    preparation.map((orderItemData, index) => (
-                      <OrderItemCard
-                        key={index}
-                        orderItemData={orderItemData}
-                        status="preparation"
-                        table={table}
-                      />
-                    ))}
-                  {ready &&
-                    isReadyClicked &&
-                    ready.map((orderItemData, index) => (
-                      <OrderItemCard
-                        key={index}
-                        orderItemData={orderItemData}
-                        status="ready"
-                        table={table}
-                      />
-                    ))}
-                  {rejected &&
-                    isRefusedClicked &&
-                    rejected.map((orderItemData, index) => (
-                      <OrderItemCard
-                        key={index}
-                        orderItemData={orderItemData}
-                        status="rejected"
-                        table={table}
-                      />
-                    ))}
-                </div>
-              )}
+              <div>
+                {isOpen && (
+                  <div className="my-2.5 grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div className="space-y-4">
+                      {preparation.length > 0 ? (
+                        preparation.map((orderItemData, index) => (
+                          <OrderItemCard
+                            key={index}
+                            orderItemData={orderItemData}
+                            status="preparation"
+                            table={table}
+                          />
+                        ))
+                      ) : (
+                        <div className="text-center">
+                          <h1 className="font-semibold text-2xl ">
+                            No Item Inside the preparation
+                          </h1>
+                        </div>
+                      )}
+                    </div>
+                    <div className="space-y-4">
+                      {ready &&
+                        isReadyClicked &&
+                        ready.map((orderItemData, index) => (
+                          <OrderItemCard
+                            key={index}
+                            orderItemData={orderItemData}
+                            status="ready"
+                            table={table}
+                          />
+                        ))}
+                    </div>
+                    <div className="space-y-4">
+                      {rejected &&
+                        isRefusedClicked &&
+                        rejected.map((orderItemData, index) => (
+                          <OrderItemCard
+                            key={index}
+                            orderItemData={orderItemData}
+                            status="rejected"
+                            table={table}
+                          />
+                        ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </>
           )}
       </>

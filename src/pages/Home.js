@@ -40,8 +40,6 @@ const Home = () => {
     });
   };
 
-  console.log({ selectedCategories });
-
   // Hold The filters
   const [filters, setFilters] = useState({
     isReadyClicked: false,
