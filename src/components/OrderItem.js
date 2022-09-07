@@ -187,14 +187,7 @@ const OrderItem = ({
 
   // Check is it according to the selected Table status or not
   const validateStatus = (status) => {
-    // const notSelectedAnyCategory = Object.values(tableStatus).every(
-    //   (value) => value === true
-    // );
-    // if (notSelectedAnyCategory) {
-    //   return true;
-    // } else {
     return tableStatus[status];
-    // }
   };
 
   return (
