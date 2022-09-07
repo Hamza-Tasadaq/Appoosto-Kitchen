@@ -187,14 +187,14 @@ const OrderItem = ({
 
   // Check is it according to the selected Table status or not
   const validateStatus = (status) => {
-    const notSelectedAnyCategory = Object.values(tableStatus).every(
-      (value) => value === false
-    );
-    if (notSelectedAnyCategory) {
-      return true;
-    } else {
-      return tableStatus[status];
-    }
+    // const notSelectedAnyCategory = Object.values(tableStatus).every(
+    //   (value) => value === true
+    // );
+    // if (notSelectedAnyCategory) {
+    //   return true;
+    // } else {
+    return tableStatus[status];
+    // }
   };
 
   return (
@@ -332,6 +332,7 @@ const OrderItem = ({
                   <div className="flex items-center flex-1 font-medium text-lg justify-start space-x-4 lg:space-x-0 lg:justify-between ">
                     <h2>Table-{table}</h2>
                     <h2>Floor- {floor}</h2>
+                    <h2>{status}</h2>
                     <h2 className="flex items-center space-x-1">
                       <span>
                         <svg

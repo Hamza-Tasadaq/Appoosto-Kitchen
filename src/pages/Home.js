@@ -6,18 +6,16 @@ const Home = () => {
   const [isExpand, setIsExpand] = useState(true);
 
   const [tableStatus, setTableStatus] = useState({
-    "Dine In": false,
-    Delivery: false,
-    "Take away": false,
+    "Dine In": true,
+    Delivery: true,
+    "Take away": true,
   });
 
   // Update the status on Click
   const statusUpdateHandler = (status) => {
     console.log(status);
     setTableStatus({
-      "Dine In": false,
-      Delivery: false,
-      "Take away": false,
+      ...tableStatus,
       [status]: !tableStatus[status],
     });
   };

@@ -22,7 +22,7 @@ const Header = ({
                 statusUpdateHandler("Dine In");
               }}
               className={`duration-300 ${
-                tableStatus["Dine In"]
+                !tableStatus["Dine In"]
                   ? " bg-transparent text-[#D85C27] "
                   : " bg-[#D85C27] text-[#ffffff]"
               } rounded-lg  py-2 px-6 border border-[#FF6422]`}
@@ -34,7 +34,7 @@ const Header = ({
                 statusUpdateHandler("Delivery");
               }}
               className={`duration-300 ${
-                tableStatus.Delivery
+                !tableStatus.Delivery
                   ? " bg-transparent text-[#D85C27] "
                   : " bg-[#D85C27] text-[#ffffff]"
               } rounded-lg  py-2 px-6 border border-[#FF6422]`}
@@ -46,7 +46,7 @@ const Header = ({
                 statusUpdateHandler("Take away");
               }}
               className={`duration-300 ${
-                tableStatus["Take away"]
+                !tableStatus["Take away"]
                   ? " bg-transparent text-[#D85C27] "
                   : " bg-[#D85C27] text-[#ffffff]"
               } rounded-lg  py-2 px-6 border border-[#FF6422]`}
