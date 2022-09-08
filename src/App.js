@@ -25,7 +25,6 @@ function App() {
     };
   }, [windowDimenion]);
 
-  console.log(windowDimenion);
 
   return (
     <div>

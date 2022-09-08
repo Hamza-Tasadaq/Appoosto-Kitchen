@@ -13,7 +13,6 @@ const Home = () => {
 
   // Update the status on Click
   const statusUpdateHandler = (status) => {
-    console.log(status);
     setTableStatus({
       ...tableStatus,
       [status]: !tableStatus[status],
