@@ -83,7 +83,7 @@ const Home = () => {
         />
         {isExpand && (
           <>
-            <div className="px-3 md:px-5 lg:px-10 py-5 space-y-6">
+            <div className="px-3 md:px-5 lg:px-10 py-2 space-y-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <button
@@ -124,7 +124,7 @@ const Home = () => {
           </>
         )}
       </div>
-      <div className="px-3 md:px-5 lg:px-10 py-5 space-y-6">
+      <div className="px-3 md:px-5 lg:px-10 py-2 space-y-6">
         <OrdersList
           tableStatus={tableStatus}
           selectedCategories={selectedCategories}
