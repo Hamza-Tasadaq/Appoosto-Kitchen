@@ -52,7 +52,7 @@ const Categories = ({
   selectedCategories = {},
 }) => {
   return (
-    <div className="flex justify-center md:cursor-pointer lg:justify-between flex-nowrap items-center overflow-x-auto lg:space-x-4">
+    <div className="flex justify-center noScrollBar md:cursor-pointer lg:justify-between flex-nowrap items-center overflow-auto lg:space-x-4">
       {CategoriesData.map(({ iconSrc, name, background }, index) => (
         <div
           onClick={() => {
@@ -66,7 +66,7 @@ const Categories = ({
             }`,
           }}
           key={index}
-          className={`rounded-lg duration-300 h-28 min-w-xs w-full bg-opacity-20 flex  items-center justify-center flex-col m-2.5 lg:m-0`}
+          className={`rounded-lg duration-300 h-28 min-w-[150px] w-full bg-opacity-20 flex  items-center justify-center flex-col m-2.5 lg:m-0`}
         >
           <img src={`./assets/icons/${iconSrc}.svg`} alt={iconSrc} />
           <h1 className="text-[#000000] font-semibold text-sm">{name}</h1>
