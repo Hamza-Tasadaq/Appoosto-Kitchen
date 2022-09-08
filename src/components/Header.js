@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Container from "./Container";
 
 const Header = ({
@@ -6,6 +7,8 @@ const Header = ({
   setIsExpand = () => {},
   statusUpdateHandler = () => {},
 }) => {
+  const [showLogout, setShowLogout] = useState(false);
+
   return (
     <div className="border-b border-[#E9E9E9] py-5">
       <Container
@@ -78,7 +81,21 @@ const Header = ({
           </div>
           <div className="flex items-center space-x-2">
             <img src="./assets/icons/avatar.svg" alt="avatar" />
-            <h2 className="text-[#0A111F] font-semibold text-base">username</h2>
+            <div
+              onClick={() => {
+                setShowLogout(!showLogout);
+              }}
+              className="flex flex-col items-center"
+            >
+              <h2 className="text-[#0A111F] cursor-pointer font-semibold text-base">
+                username
+              </h2>
+              {showLogout && (
+                <h3 className="text-[#FF6422] cursor-pointer font-semibold text-base">
+                  Logout
+                </h3>
+              )}
+            </div>
           </div>
         </div>
       </Container>

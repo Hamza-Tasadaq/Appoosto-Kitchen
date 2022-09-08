@@ -15,7 +15,7 @@ const LogIn = () => {
           <h1 className="font-semibold my-3 md:my-5 text-2xl text-[#0A111F]">
             Sign in to your Account
           </h1>
-          <div className="flex items-center space-x-3">
+          {/* <div className="flex items-center space-x-3">
             <button className="bg-[#4065B4] rounded-md flex items-center h-9 md:h-11 justify-center flex-1 space-x-2">
               <img
                 className="mt-0.5"
@@ -38,8 +38,8 @@ const LogIn = () => {
             <div className="bg-[#C0C4CA] h-px flex-1" />
             <h3 className="text-[#C0C4CA] mb-1.5 mx-1">Or</h3>
             <div className="bg-[#C0C4CA] h-px flex-1" />
-          </div>
-          <form className="space-y-2.5">
+          </div> */}
+          <form className="space-y-2.5 mt-4 md:mt-10">
             <div className="flex flex-col space-y-2">
               <label className="text-[#0A111F] font-medium text-base">
                 Email address
