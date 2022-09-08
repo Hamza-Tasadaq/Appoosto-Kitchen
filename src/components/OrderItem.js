@@ -201,11 +201,11 @@ const OrderItem = ({
           <>
             <div className="flex items-center space-x-2">
               <div className="bg-[#0C234C] text-[#ffffff] p-2 rounded-md space-x-1 lg:space-x-0 flex items-center justify-between flex-1 h-16 ">
-                <div className="flex items-center flex-1 font-medium text-lg justify-start space-x-4 lg:space-x-0 lg:justify-between ">
-                  <h2>Table-{table}</h2>
-                  <h2>Floor- {floor}</h2>
-                  <h2>{status}</h2>
-                  <h2 className="flex items-center space-x-1">
+                <div className="flex items-center flex-1 font-medium text-lg justify-start space-x-3 lg:space-x-0 lg:justify-between ">
+                  <h2 className="text-sm lg:text-lg">Table-{table}</h2>
+                  <h2 className="text-sm lg:text-lg">Floor- {floor}</h2>
+                  <h2 className="text-sm lg:text-lg">{status}</h2>
+                  <h2 className="flex text-sm lg:text-lgs items-center space-x-1">
                     <span>
                       <svg
                         width="20"
@@ -224,7 +224,7 @@ const OrderItem = ({
                         />
                       </svg>
                     </span>
-                    <span>
+                    <span className="text-sm lg:text-lg">
                       Order Time: <span className="font-light">{time}</span>
                     </span>
                   </h2>
@@ -322,11 +322,11 @@ const OrderItem = ({
             <>
               <div className="flex items-center space-x-2">
                 <div className="bg-[#0C234C] text-[#ffffff] p-2 rounded-md space-x-1 lg:space-x-0 flex items-center justify-between flex-1 h-16 ">
-                  <div className="flex items-center flex-1 font-medium text-lg justify-start space-x-4 lg:space-x-0 lg:justify-between ">
-                    <h2>Table-{table}</h2>
-                    <h2>Floor- {floor}</h2>
-                    <h2>{status}</h2>
-                    <h2 className="flex items-center space-x-1">
+                  <div className="flex items-center flex-1 font-medium text-lg justify-start md:space-x-3 lg:space-x-0 lg:justify-between ">
+                    <h2 className="text-sm lg:text-lg">Table-{table}</h2>
+                    <h2 className="text-sm lg:text-lg">Floor- {floor}</h2>
+                    <h2 className="text-sm lg:text-lg">{status}</h2>
+                    <h2 className="flex text-sm lg:text-lg items-center space-x-1">
                       <span>
                         <svg
                           width="20"
@@ -345,7 +345,7 @@ const OrderItem = ({
                           />
                         </svg>
                       </span>
-                      <span>
+                      <span className="text-sm lg:text-lg">
                         Order Time: <span className="font-light">{time}</span>
                       </span>
                     </h2>
