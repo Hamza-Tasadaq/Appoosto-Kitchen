@@ -81,9 +81,9 @@ const Home = () => {
           isExpand={isExpand}
           setIsExpand={setIsExpand}
         />
-        <div className="px-3 md:px-5 lg:px-10 py-5 space-y-6">
-          {isExpand && (
-            <>
+        {isExpand && (
+          <>
+            <div className="px-3 md:px-5 lg:px-10 py-5 space-y-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <button
@@ -120,9 +120,9 @@ const Home = () => {
                 selectedCategories={selectedCategories}
                 categoryClickHandler={categoryClickHandler}
               />
-            </>
-          )}
-        </div>
+            </div>
+          </>
+        )}
       </div>
       <div className="px-3 md:px-5 lg:px-10 py-5 space-y-6">
         <OrdersList
