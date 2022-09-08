@@ -5,3 +5,12 @@
 .noScrollBar::-webkit-scrollbar {
   display: none;
 }
+
+body {
+  background-color: #ffffff;
+}
+@media screen and (max-width: 768px) {
+  body {
+    background-color: black;
+  }
+}
