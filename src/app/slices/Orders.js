@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   orders: [
     {
+      isVisible: true,
       id: "1",
       table: "1",
       floor: "1",
@@ -73,6 +74,7 @@ const initialState = {
       },
     },
     {
+      isVisible: true,
       id: "2",
       table: "2",
       floor: "1",
@@ -120,6 +122,7 @@ const initialState = {
       },
     },
     {
+      isVisible: true,
       id: "3",
       table: "3",
       floor: "2",
@@ -304,10 +307,29 @@ export const ordersSlice = createSlice({
         }
       }
     },
+    updateVisibility: (state, actions) => {
+      const { id, update } = actions.payload;
+      if (update === "show") {
+        state.orders.forEach((orderItem) => {
+          orderItem.isVisible = true;
+        });
+      } else if (update === "hide") {
+        state.orders.forEach((orderItem) => {
+          if (orderItem.id === id) {
+          } else {
+            orderItem.isVisible = false;
+          }
+        });
+      }
+    },
   },
 });
 
-export const { splitCard, updateOrderStatus, updateAllOrdersOfTable } =
-  ordersSlice.actions;
+export const {
+  splitCard,
+  updateOrderStatus,
+  updateAllOrdersOfTable,
+  updateVisibility,
+} = ordersSlice.actions;
 
 export default ordersSlice.reducer;
