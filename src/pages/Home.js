@@ -74,53 +74,57 @@ const Home = () => {
   };
   return (
     <div>
-      <Header
-        statusUpdateHandler={statusUpdateHandler}
-        tableStatus={tableStatus}
-        isExpand={isExpand}
-        setIsExpand={setIsExpand}
-      />
+      <div className="sticky top-0 left-0 z-50 bg-white">
+        <Header
+          statusUpdateHandler={statusUpdateHandler}
+          tableStatus={tableStatus}
+          isExpand={isExpand}
+          setIsExpand={setIsExpand}
+        />
+        <div className="px-3 md:px-5 lg:px-10 py-5 space-y-6">
+          {isExpand && (
+            <>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => {
+                      filtersHandler("In Progress");
+                    }}
+                    className={`${
+                      filters.isProgressClicked
+                        ? " bg-[#0C234C] text-[#ffffff] "
+                        : " bg-transparent text-[#627193]"
+                    }   rounded-md font-semibold text-base py-2  px-5`}
+                  >
+                    In Progress
+                  </button>
+                  <button
+                    onClick={() => {
+                      filtersHandler("completed");
+                    }}
+                    className={`${
+                      filters.isCompletedCLick
+                        ? " bg-[#0C234C] text-[#ffffff] "
+                        : " bg-transparent text-[#627193]"
+                    }  rounded-md font-semibold text-base py-2  px-5`}
+                  >
+                    Completed
+                  </button>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Switch handleFilter={filtersHandler} text={"Show Refused"} />
+                  <Switch handleFilter={filtersHandler} text={"Show Ready"} />
+                </div>
+              </div>
+              <Categories
+                selectedCategories={selectedCategories}
+                categoryClickHandler={categoryClickHandler}
+              />
+            </>
+          )}
+        </div>
+      </div>
       <div className="px-3 md:px-5 lg:px-10 py-5 space-y-6">
-        {isExpand && (
-          <>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => {
-                    filtersHandler("In Progress");
-                  }}
-                  className={`${
-                    filters.isProgressClicked
-                      ? " bg-[#0C234C] text-[#ffffff] "
-                      : " bg-transparent text-[#627193]"
-                  }   rounded-md font-semibold text-base py-2  px-5`}
-                >
-                  In Progress
-                </button>
-                <button
-                  onClick={() => {
-                    filtersHandler("completed");
-                  }}
-                  className={`${
-                    filters.isCompletedCLick
-                      ? " bg-[#0C234C] text-[#ffffff] "
-                      : " bg-transparent text-[#627193]"
-                  }  rounded-md font-semibold text-base py-2  px-5`}
-                >
-                  Completed
-                </button>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Switch handleFilter={filtersHandler} text={"Show Refused"} />
-                <Switch handleFilter={filtersHandler} text={"Show Ready"} />
-              </div>
-            </div>
-            <Categories
-              selectedCategories={selectedCategories}
-              categoryClickHandler={categoryClickHandler}
-            />
-          </>
-        )}
         <OrdersList
           tableStatus={tableStatus}
           selectedCategories={selectedCategories}
