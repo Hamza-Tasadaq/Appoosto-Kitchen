@@ -54,6 +54,8 @@ const OrderItem = ({
 
   //   Handle The State About the details of order is shown or not?
   const [isOpen, setIsOpen] = useState(false);
+  // Hold the state about the doc toggle is clicked or not?
+  const [enabled, setEnabled] = useState(false);
 
   const showDetailsHandler = () => {
     setIsOpen(!isOpen);
@@ -234,7 +236,11 @@ const OrderItem = ({
                     </h2>
                   </div>
                   <div className="flex-1 flex items-center justify-end space-x-2">
-                    <DocToggle id={id} />
+                    <DocToggle
+                      id={id}
+                      enabled={enabled}
+                      setEnabled={setEnabled}
+                    />
                     <button
                       onClick={() => {
                         handleButtonClick("Prepare All");
@@ -357,7 +363,11 @@ const OrderItem = ({
                     </h2>
                   </div>
                   <div className="flex-1 flex items-center justify-end space-x-2">
-                    <DocToggle id={id} />
+                    <DocToggle
+                      id={id}
+                      enabled={enabled}
+                      setEnabled={setEnabled}
+                    />
                     <button
                       onClick={() => {
                         handleButtonClick("Prepare All");

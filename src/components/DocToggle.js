@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateVisibility } from "../app/slices/Orders";
 
-const DocToggle = ({ id }) => {
+const DocToggle = ({ id, enabled = "", setEnabled = () => {} }) => {
   const dispatch = useDispatch();
-  const [enabled, setEnabled] = useState(false);
 
+  console.log({ enabled });
   const clickHandler = () => {
     if (enabled) {
       dispatch(updateVisibility({ id, update: "show" }));
@@ -19,11 +18,11 @@ const DocToggle = ({ id }) => {
     <div
       onClick={clickHandler}
       className={`bg-[#D85C27] rounded-md duration-300 h-8 w-20 p-[3px] cursor-pointer flex items-center justify-between  ${
-        enabled ? " flex-row-reverse " : " flex-row "
+        !enabled ? " flex-row-reverse " : " flex-row "
       }`}
     >
       <div className="bg-white h-full w-1/2 rounded-sm"></div>
-      {enabled ? (
+      {!enabled ? (
         <img
           className="mx-1 h-6 w-6"
           src="./assets/icons/double-doc.svg"
