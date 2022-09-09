@@ -2,8 +2,9 @@ import { useState } from "react";
 import pdfMake from "pdfmake";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import { updateAllOrdersOfTable, updateVisibility } from "../app/slices/Orders";
+import { updateAllOrdersOfTable } from "../app/slices/Orders";
 import OrderItemCard from "./OrderItemCard";
+import DocToggle from "./DocToggle";
 
 // To Load Image into PDFMAke
 function getBase64ImageFromURL(url) {
@@ -233,7 +234,7 @@ const OrderItem = ({
                     </h2>
                   </div>
                   <div className="flex-1 flex items-center justify-end space-x-2">
-                    <SwitchLg id={id} />
+                    <DocToggle id={id} />
                     <button
                       onClick={() => {
                         handleButtonClick("Prepare All");
@@ -356,7 +357,7 @@ const OrderItem = ({
                     </h2>
                   </div>
                   <div className="flex-1 flex items-center justify-end space-x-2">
-                    <SwitchLg id={id} />
+                    <DocToggle id={id} />
                     <button
                       onClick={() => {
                         handleButtonClick("Prepare All");
@@ -447,32 +448,3 @@ const OrderItem = ({
 };
 
 export default OrderItem;
-
-const SwitchLg = ({ id }) => {
-  const dispatch = useDispatch();
-  const [enabled, setEnabled] = useState(false);
-
-  const clickHandler = () => {
-    if (enabled) {
-      dispatch(updateVisibility({ id, update: "show" }));
-    } else {
-      dispatch(updateVisibility({ id, update: "hide" }));
-    }
-
-    setEnabled(!enabled);
-  };
-  return (
-    <label className="inline-flex flex-row-reverse relative space-x-2 items-center cursor-pointer">
-      <input
-        type="checkbox"
-        className="sr-only peer"
-        checked={enabled}
-        readOnly
-      />
-      <div
-        onClick={clickHandler}
-        className="w-16 h-6 bg-[#E9E9E9] rounded-full peer  peer-focus:[#FF6422]  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:right-[41px] after:bg-[white] after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r from-[#FF6422] to-[#D85C2700]"
-      ></div>
-    </label>
-  );
-};
